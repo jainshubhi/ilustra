@@ -13,17 +13,33 @@
   <link href="../static/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 <body>
-  <div class="intro black z-depth-1">
-    <h1 class="yellow-text">Ilustra</h1>
-    <!-- search -->
-    <form method="get" action="/search">
-      <div class="container black input-field">
-        <input id="song" name="song" type="search" class="black yellow-text" required>
-        <label class="center yellow-text" for="search"><i class="yellow-text material-icons left">search</i>Search for a song, artist, or album</label>
-        <i class="material-icons">close</i>
+  <div class="index-banner black z-depth-1">
+    <nav class="black" role="navigation">
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="/" class="brand-logo center yellow-text">ILUSTRA</a>
       </div>
-    </form>
+    </nav>
   </div>
+  <table class="container">
+    <thead>
+      <tr>
+          <th data-field="song" class="white-text">Song</th>
+          <th data-field="artist" class="white-text">Artist</th>
+          <th data-field="play" class="white-text">Play</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for result in results %}
+        {% if result['type'] == 'song' %}
+          <tr>
+            <td class="yellow-text">{{ result['result']['title'] }}</td>
+            <td class="yellow-text">{{ result['result']['primary_artist']['name'] }}</td>
+            <td class="yellow-text">{{ result['result']['url'] }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
 
 
   <!--  Scripts-->
